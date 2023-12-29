@@ -1,17 +1,20 @@
 import { WeatherData } from '../interfaces/weatherData';
+import { ListItem } from '../interfaces/weatherForecast';
 import './WeatherTile.css';
 
-interface Props{
-    currentWeather: WeatherData;
+interface Props {
+    currentWeather: WeatherData | ListItem;
 }
-const WeatherTile = ({currentWeather}: Props) => {
+
+const WeatherTile = ({ currentWeather }: Props) => {
 
     return (<div className="tile-wrapper">
         <img className='weather-icon' src={`https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`} alt=""></img>
         <div className="temperature">{currentWeather.weather[0].description}</div>
+        <div>{currentWeather?.dt_internal}</div>
         <div className="temperature">
-        <div className='temp-value'>{Math.round(currentWeather.main.temp)}</div>
-        <sup className='temp-unit'>°C</sup>
+            <div className='temp-value'>{Math.round(currentWeather.main.temp)}</div>
+            <sup className='temp-unit'>°C</sup>
         </div>
         <div className="weather-parameters">
             <div className="param">

@@ -58,4 +58,5 @@ export interface WeatherData {
   id: number;
   name: string;
   cod: number;
+  dt_internal?: string
 }
