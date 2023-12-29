@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useState } from 'react'
+import Search from './components/search'
+import WeatherTile from './components/WeatherTile'
+import { Coordinates } from './interfaces/cityData'
+import { WeatherData } from './interfaces/weatherData'
+import { ListItem, WeatherForecast } from './interfaces/weatherForecast'
+import { GetWeather, GetWeatherForeacast } from './services/weather.api'
+import WeatherForecastTile from './components/weatherForecast'
+import { format } from 'date-fns/format'
+import groupBy from 'lodash/groupBy';
+import mapValues from 'lodash/mapValues';
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const [currentWeather, setCurrentWeather] = useState<WeatherData>();
+  const [forecastedWeather, setForecastedWeather] = useState<ListItem[]>();
+
+  const getFormattedDate = (unixDateTime: number) => {
+    const date = new Date(unixDateTime * 1000);
+    const formattedDate = format(date, 'MMM d eeee');
+
+    return formattedDate;
+  }
+
+  const onCitySelected = async ({ longitude, latitude }: Coordinates) => {
+    const [currentWeather, weatherForecast] = await Promise.all([
+      GetWeather(latitude, longitude),
+      GetWeatherForeacast(latitude, longitude),
+    ]);
+
+    const data: WeatherForecast = { ...weatherForecast, list: weatherForecast.list.map(forecast => { return { ...forecast, dt_internal: getFormattedDate(forecast.dt) } }) };
+    const groupedWeather = mapValues(groupBy(data.list, 'dt_internal'), group => group[0]);
+    setCurrentWeather(currentWeather);
+    setForecastedWeather(Object.values(groupedWeather));
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className='main-container'>
+        <Search onCitySelected={onCitySelected} />
+        {currentWeather && <WeatherTile currentWeather={currentWeather} />}
+        {forecastedWeather && <WeatherForecastTile weatherForecast={forecastedWeather} />}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
     </>
   )
 }
 
-export default App
+export default App;
