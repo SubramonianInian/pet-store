@@ -1,6 +1,6 @@
 import wretch from "wretch"
 import { ecosystem } from "../ecosystem.config"
-import { ApiResponse } from "../interfaces/CityData";
+import { ApiResponse } from "../interfaces/cityData";
 import { WeatherData } from "../interfaces/weatherData";
 
 /**

@@ -9,7 +9,7 @@ import { WeatherData } from "../interfaces/weatherData";
  * @returns The current weather
  */
 export const GetWeather = async (lat: string, lon: string): Promise<WeatherData> => {
-     return await WeatherApi.get(`/weather?lat=${lat}&lon=${lon}&appid=${ecosystem.apis.weather.key}`)
+     return await WeatherApi.get(`/weather?lat=${lat}&lon=${lon}&appid=${ecosystem.apis.weather.key}&units=${ecosystem.apis.weather.unit}`)
 };
 
 /**
@@ -19,5 +19,5 @@ export const GetWeather = async (lat: string, lon: string): Promise<WeatherData>
  * @returns The weather forecast
  */
 export const GetWeatherForeacast = async (lat: string, lon: string): Promise<WeatherData> => { 
-    return await WeatherApi.get(`/forecast?lat=${lat}&lon=${lon}&appid=${ecosystem.apis.weather.key}`)
+    return await WeatherApi.get(`/forecast?lat=${lat}&lon=${lon}&appid=${ecosystem.apis.weather.key}&units=${ecosystem.apis.weather.unit}`)
 };

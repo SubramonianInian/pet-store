@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CityData, Coordinates } from "../interfaces/CityData";
+import { CityData, Coordinates } from "../interfaces/cityData";
 import { GetCities } from "../services/cities.api";
 import { AsyncPaginate } from "react-select-async-paginate";
 

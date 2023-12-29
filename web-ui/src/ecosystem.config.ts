@@ -7,7 +7,7 @@ export const ecosystem = {
         },
         weather: {
             url: "",
-            key: ""
+            key: "",
+            unit: "metric"
         }
     }
-}

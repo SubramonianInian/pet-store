@@ -1,9 +1,10 @@
 import './App.css'
 import { useState } from 'react'
 import Search from './components/search'
-import { Coordinates } from './interfaces/CityData'
+import { Coordinates } from './interfaces/cityData'
 import { WeatherData } from './interfaces/weatherData'
 import { GetWeather, GetWeatherForeacast } from './services/weather.api'
+import WeatherTile from './components/WeatherTile'
 
 function App() {
 
@@ -23,6 +24,8 @@ function App() {
     <>
       <div className='main-container'>
         <Search onCitySelected={onCitySelected} />
+        {currentWeather && 
+        <WeatherTile currentWeather= {currentWeather}/>}
       </div>
 
     </>
