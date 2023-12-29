@@ -1,33 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useState } from 'react'
+import Search from './components/search'
+import { Coordinates } from './interfaces/CityData'
+import { WeatherData } from './interfaces/weatherData'
+import { GetWeather, GetWeatherForeacast } from './services/weather.api'
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const [currentWeather, setCurrentWeather] = useState<WeatherData>();
+  const [forecastedWeather, setForecastedWeather] = useState<WeatherData>();
+
+  const onCitySelected = async ({ longitude, latitude }: Coordinates) => {
+    const [currentWeather, weatherForecast] = await Promise.all([
+      GetWeather(latitude, longitude),
+      GetWeatherForeacast(latitude, longitude),
+    ]);
+
+    setCurrentWeather(currentWeather);
+    setForecastedWeather(weatherForecast);
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className='main-container'>
+        <Search onCitySelected={onCitySelected} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
     </>
   )
 }
