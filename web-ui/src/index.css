@@ -3,22 +3,29 @@
     line-height: 1.5;
     font-weight: 400;
 
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #959292;
+    /* color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87); */
+    /* background-color: #959292; */
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(
+            50deg,
+            rgba(0, 0, 0, 0.7490196078),
+            rgb(50 61 70 / 75%)
+        ),
+        url(./assets/1335989.png);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-
-
 
 body {
     margin: 0;
-    display: flex;
+
+    /* display: flex;
     place-items: center;
     min-width: 320px;
-    min-height: 100vh;
+    min-height: 100vh; */
 }

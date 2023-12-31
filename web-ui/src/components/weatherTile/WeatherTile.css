@@ -1,0 +1,75 @@
+.tile-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-shrink: 1;
+    margin: 0.5rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.233);
+    color: white;
+    border-radius: 0.5rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    overflow: hidden;
+}
+
+.tile-wrapper:hover {
+    background-color: rgba(16, 16, 16, 0.696)
+}
+
+.summary-style:hover {
+    background-color: rgba(16, 16, 16, 0.696)
+}
+
+.summary-style {
+    display: flex;
+    align-items: center;
+    flex-shrink: 1;
+    margin: 0.5rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.233);
+    color: white;
+    border-radius: 0.5rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    overflow: hidden;
+    width: 34%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.temperature {
+    display: flex;
+    gap: 0.15rem;
+}
+
+.temperature .temp-value {
+    font-size: 3em;
+}
+
+.temperature .temp-unit {
+    font-size: 2.5em;
+}
+
+.weather-icon {
+    display: flex;
+}
+
+.param {
+    display: flex;
+    gap: 0.25rem;
+    justify-content: space-between;
+}
+
+.param .param-value {
+    display: flex;
+    align-items: end;
+    color: #ec6e4c;
+}
+
+.orange-text {
+    color: #ec6e4c;
+}
+
+.description {
+    text-transform: capitalize;
+}
